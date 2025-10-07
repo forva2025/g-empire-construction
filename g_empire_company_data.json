@@ -1,0 +1,41 @@
+{
+  "company_name": "G.Empire Construction Company",
+  "location": "Kampala, Uganda",
+  "contact_details": {
+    "phone": "+256784855806",
+    "address": "Kirokole ssendawura Rd, Kampala, Uganda",
+    "area": "Kawempe division"
+  },
+  "leadership": {
+    "managing_director": {
+      "name": "Nsubuga Abdu",
+      "position": "Managing Director",
+      "location": "Wakiso, Central Region, Uganda",
+      "experience": "August 2019 - Present (5+ years)",
+      "education": [
+        "Uganda Technical College Kichwamba - National Diploma in Civil Engineering (2019-2021)",
+        "Mandela College School - O Level and A Level (2012-2018)",
+        "University of Architecture, Civil Engineering and Geodesy"
+      ],
+      "previous_experience": [
+        "Subcontractor at Henan Gounji (NSSF APARTMENTS TEMANGALO) - July 2023 - October 2023",
+        "G PLUS TECHNICAL SERVICES LIMITED - February 2020 - November 2022"
+      ]
+    }
+  },
+  "services": [
+    "Building & Civil Construction",
+    "Infrastructure Development",
+    "Construction Management",
+    "Turn-key Construction Projects",
+    "General Contracting"
+  ],
+  "projects": [
+    "NSSF APARTMENTS TEMANGALO (as subcontractor)",
+    "Various construction projects in Kampala and Wakiso areas"
+  ],
+  "company_description": "G.Empire Construction Company is a multi-disciplinary construction firm based in Uganda that handles turn-key construction processes from inception to finish. The company specializes in building and civil construction, with experience in residential, commercial, and infrastructure projects.",
+  "business_hours": "Open Now (operational)",
+  "rating": "5.0",
+  "established": "August 2019"
+}
