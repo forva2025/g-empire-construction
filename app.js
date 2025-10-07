@@ -285,30 +285,49 @@ function initProjectFilter() {
 
 // Testimonials Slider
 function initTestimonialsSlider() {
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    let currentTestimonial = 0;
-    
+    const testimonialCards = Array.from(document.querySelectorAll('.testimonial-card'));
+    const prevBtn = document.querySelector('.testimonials-prev');
+    const nextBtn = document.querySelector('.testimonials-next');
+    const visibleCount = 3; // show at least 3
+    let startIndex = 0;
+
     if (testimonialCards.length === 0) return;
-    
-    function showTestimonial(index) {
-        testimonialCards.forEach((card, i) => {
-            card.classList.remove('active');
-            if (i === index) {
-                card.classList.add('active');
-            }
+
+    function showRange(start) {
+        testimonialCards.forEach(card => card.classList.remove('visible', 'active'));
+        for (let i = 0; i < Math.min(visibleCount, testimonialCards.length); i++) {
+            const idx = (start + i) % testimonialCards.length;
+            testimonialCards[idx].classList.add('visible');
+        }
+    }
+
+    function next() {
+        startIndex = (startIndex + 1) % testimonialCards.length;
+        showRange(startIndex);
+    }
+
+    function prev() {
+        startIndex = (startIndex - 1 + testimonialCards.length) % testimonialCards.length;
+        showRange(startIndex);
+    }
+
+    // Auto-advance testimonials
+    const intervalId = setInterval(next, 5000);
+
+    // Navigation buttons
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            next();
         });
     }
-    
-    function nextTestimonial() {
-        currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-        showTestimonial(currentTestimonial);
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            prev();
+        });
     }
-    
-    // Auto-advance testimonials
-    setInterval(nextTestimonial, 5000);
-    
-    // Initialize first testimonial
-    showTestimonial(0);
+
+    // Initialize visible range
+    showRange(0);
 }
 
 // Contact Form
@@ -319,48 +338,11 @@ function initContactForm() {
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        // Add loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
-        
-        // Simulate form submission
-        setTimeout(() => {
-            // Success animation
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-            submitBtn.style.background = 'var(--color-success)';
-            
-            // Show success message
-            showNotification('Thank you! Your message has been sent successfully. We will get back to you soon.', 'success');
-            
-            // Reset form
-            setTimeout(() => {
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-            }, 3000);
-            
-        }, 2000);
+        // Instantly acknowledge without delay or animation
+        showNotification('Thank you! Your message has been sent successfully.', 'success');
+        contactForm.reset();
     });
-    
-    // Add input animations
-    const formInputs = contactForm.querySelectorAll('.form-control');
-    formInputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentNode.style.transform = 'scale(1.02)';
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentNode.style.transform = '';
-        });
-    });
+    // Remove input scaling effects for a snappier form experience
 }
 
 // Show notification
@@ -453,7 +435,7 @@ function initScrollAnimations() {
     }
     
     // Animate elements on scroll
-    const animateOnScrollElements = document.querySelectorAll('.service-card, .project-card, .testimonial-card, .contact-item');
+    const animateOnScrollElements = document.querySelectorAll('.service-card, .project-card, .contact-item');
     
     // Set initial states
     animateOnScrollElements.forEach(el => {

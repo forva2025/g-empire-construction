@@ -966,6 +966,11 @@ body {
   animation: fadeInUp 1s ease-out 0.6s both;
 }
 
+/* Add spacing between icons and text in hero buttons */
+.hero-buttons .btn {
+  gap: var(--space-8);
+}
+
 .scroll-indicator {
   position: absolute;
   bottom: var(--space-32);
@@ -1302,6 +1307,16 @@ body {
   gap: var(--space-16);
 }
 
+/* Ensure "Get Quote" buttons in Services use black text */
+.services-section .service-buttons .btn--outline {
+  color: var(--color-black);
+}
+.services-section .service-buttons .btn--outline:hover,
+.services-section .service-buttons .btn--outline:active,
+.services-section .service-buttons .btn--outline:focus {
+  color: var(--color-black);
+}
+
 /* Projects Section */
 .projects-section {
   padding: 100px 0;
@@ -1452,10 +1467,18 @@ body {
   background: var(--color-bg-1);
 }
 
+/* Make testimonials section title white */
+.testimonials-section .section-title {
+  color: var(--color-white);
+}
+
 .testimonials-slider {
   position: relative;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-24);
 }
 
 .testimonial-card {
@@ -1468,9 +1491,9 @@ body {
   transition: var(--transition-smooth);
 }
 
-.testimonial-card.active {
+.testimonial-card.visible,
+.testimonial-card.active { /* keep backward compatibility */
   display: block;
-  animation: fadeInUp 0.6s ease-out;
 }
 
 .testimonial-content p {
@@ -1497,6 +1520,47 @@ body {
   margin-top: var(--space-24);
   color: #fbbf24;
   font-size: var(--font-size-lg);
+}
+
+/* Testimonials navigation controls */
+.testimonials-controls {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-8);
+}
+
+.testimonials-nav {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
+}
+
+.testimonials-nav:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .testimonials-slider {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials-slider {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Contact Section */
